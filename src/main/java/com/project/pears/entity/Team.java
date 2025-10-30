@@ -1,18 +1,18 @@
 package com.project.pears.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
+
+import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Team {
     @Id
-    @Generated
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    private List<Person> persons;
 }

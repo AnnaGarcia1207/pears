@@ -1,20 +1,21 @@
 package com.project.pears.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
-@Getter
-@Setter
 public class Person {
 
-    @Generated
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private Long Id;
-    private String Name;
-    private String Role;
-    private Long TeamId;
+    private Long id;
+    private String name;
+    private String role;
+    @ManyToOne
+    @JoinColumn(name= "team_id")
+    private Team team;
+    @ManyToOne
+    @JoinColumn(name = "pair_id")
+    private Pair pair;
 }
