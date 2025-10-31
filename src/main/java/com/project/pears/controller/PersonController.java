@@ -1,13 +1,12 @@
 package com.project.pears.controller;
 
+import com.project.pears.dto.PersonDTO;
 import com.project.pears.entity.Person;
 import com.project.pears.service.PersonService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/persons")
@@ -18,8 +17,30 @@ public class PersonController {
 
 
     @GetMapping()
-    public ResponseEntity<Person> getById(@RequestParam Long id) {
-        Person person = personService.getById(id);
-        return ResponseEntity.ok(person);
+    public ResponseEntity<PersonDTO> getById(@RequestParam Long id) {
+        PersonDTO dto = personService.getById(id);
+        return ResponseEntity.ok(dto);
     }
+
+    @PostMapping
+    public ResponseEntity<PersonDTO> create(@RequestBody @Valid PersonDTO personDTO) {
+        PersonDTO dto = personService.create(personDTO);
+        return ResponseEntity.ok(dto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonDTO> update(@RequestBody @Valid PersonDTO personDTO, @PathVariable String id) {
+        PersonDTO dto = personService.update(id, personDTO);
+        return ResponseEntity.ok(dto);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        personService.delete(id);
+        return ResponseEntity.noContent().build(); // returns 204 Standard REST
+    }
+
+
+
+
 }

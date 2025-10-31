@@ -1,9 +1,12 @@
 package com.project.pears.service;
 
+import com.project.pears.dto.PersonDTO;
 import com.project.pears.entity.Person;
 import com.project.pears.exception.PersonNotFoundException;
+import com.project.pears.factory.PersonFactory;
 import com.project.pears.repository.PersonRepository;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,23 @@ import org.springframework.stereotype.Service;
 public class PersonService {
 
     private final PersonRepository personRepository;
+    private final PersonFactory factory;
 
-    public Person getById(Long id) {
-        return personRepository.findById(id)
+    public PersonDTO getById(Long id) {
+        Person person =  personRepository.findById(id)
                 .orElseThrow( () -> new PersonNotFoundException("Person with cannot be found with ID: " + id));
+        return factory.toDTO(person);
+    }
+
+    public PersonDTO create(@Valid PersonDTO personDTO) {
+        throw new UnsupportedOperationException("Operation is not yet implemented ");
+    }
+
+    public PersonDTO update(String id, @Valid PersonDTO personDTO) {
+        throw new UnsupportedOperationException("Operation is not yet implemented");
+    }
+
+    public void delete(String id) {
+        throw new UnsupportedOperationException("Operation is not yet implemented");
     }
 }
