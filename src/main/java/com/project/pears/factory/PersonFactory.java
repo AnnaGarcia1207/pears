@@ -2,8 +2,9 @@ package com.project.pears.factory;
 
 import com.project.pears.dto.PersonDTO;
 import com.project.pears.entity.Person;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class PersonFactory {
 
     public PersonDTO toDTO(Person person) {
