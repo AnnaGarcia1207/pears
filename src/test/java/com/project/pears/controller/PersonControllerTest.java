@@ -60,8 +60,14 @@ class PersonControllerTest {
                 .role(role)
                 .build();
 
+        PersonDTO createdPerson = PersonDTO.builder()
+                .id("2")
+                .name(name)
+                .role(role)
+                .build();
+
         // Arrange
-        when(mockPersonService.create(any(PersonDTO.class))).thenReturn(dto);
+        when(mockPersonService.create(any(PersonDTO.class))).thenReturn(createdPerson);
 
         // Act
         ResponseEntity<PersonDTO> response = subject.create(dto);
