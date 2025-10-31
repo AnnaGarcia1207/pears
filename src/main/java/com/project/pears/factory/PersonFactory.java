@@ -2,9 +2,7 @@ package com.project.pears.factory;
 
 import com.project.pears.dto.PersonDTO;
 import com.project.pears.entity.Person;
-import com.project.pears.entity.Team;
 
-import java.util.Optional;
 
 public class PersonFactory {
 

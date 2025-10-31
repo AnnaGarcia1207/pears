@@ -1,7 +1,6 @@
 package com.project.pears.controller;
 
 import com.project.pears.dto.PersonDTO;
-import com.project.pears.entity.Person;
 import com.project.pears.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ public class PersonController {
 
 
     @GetMapping()
-    public ResponseEntity<PersonDTO> getById(@RequestParam Long id) {
+    public ResponseEntity<PersonDTO> getById(@RequestParam String id) {
         PersonDTO dto = personService.getById(id);
         return ResponseEntity.ok(dto);
     }

@@ -18,8 +18,8 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final PersonFactory factory;
 
-    public PersonDTO getById(Long id) {
-        Person person =  personRepository.findById(id)
+    public PersonDTO getById(String id) {
+        Person person =  personRepository.findById(Long.valueOf(id))
                 .orElseThrow( () -> new PersonNotFoundException("Person with cannot be found with ID: " + id));
         return factory.toDTO(person);
     }
