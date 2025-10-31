@@ -1,20 +1,17 @@
 package com.project.pears.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.Generated;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Pair {
     @Id
-    @Generated
-    private Long Id;
-    private List<Person> pairs;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @OneToMany(mappedBy = "pair", cascade = CascadeType.ALL)
+    private List<Person> persons;
 }
