@@ -1,6 +1,6 @@
 package com.project.pears.controller;
 
-import com.project.pears.dto.PersonDTO;
+import com.project.pears.dto.PersonDto;
 import com.project.pears.service.PersonService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,20 +16,20 @@ public class PersonController {
 
 
     @GetMapping()
-    public ResponseEntity<PersonDTO> getById(@RequestParam String id) {
-        PersonDTO dto = personService.getById(id);
+    public ResponseEntity<PersonDto> getById(@RequestParam String id) {
+        PersonDto dto = personService.getById(id);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    public ResponseEntity<PersonDTO> create(@RequestBody @Valid PersonDTO personDTO) {
-        PersonDTO dto = personService.create(personDTO);
+    public ResponseEntity<PersonDto> create(@RequestBody @Valid PersonDto personDTO) {
+        PersonDto dto = personService.create(personDTO);
         return ResponseEntity.ok(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PersonDTO> update(@RequestBody @Valid PersonDTO personDTO, @PathVariable String id) {
-        PersonDTO dto = personService.update(id, personDTO);
+    public ResponseEntity<PersonDto> update(@RequestBody @Valid PersonDto personDTO, @PathVariable String id) {
+        PersonDto dto = personService.update(id, personDTO);
         return ResponseEntity.ok(dto);
     }
 

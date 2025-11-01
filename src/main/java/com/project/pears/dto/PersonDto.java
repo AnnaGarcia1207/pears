@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class PersonDTO {
+public class PersonDto {
 
     private String id;
     @NotNull(message= "Person's name is required")

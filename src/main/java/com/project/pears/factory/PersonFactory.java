@@ -1,20 +1,20 @@
 package com.project.pears.factory;
 
-import com.project.pears.dto.PersonDTO;
+import com.project.pears.dto.PersonDto;
 import com.project.pears.entity.Person;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PersonFactory {
 
-    public PersonDTO toDTO(Person person) {
-        return PersonDTO.builder()
+    public PersonDto toDTO(Person person) {
+        return PersonDto.builder()
                 .name(person.getName())
                 .role(person.getRole())
                 .build();
     }
 
-    public Person toEntity(PersonDTO personDTO) {
+    public Person toEntity(PersonDto personDTO) {
         Person person = new Person();
         person.setName(personDTO.getName());
         person.setRole(personDTO.getRole());

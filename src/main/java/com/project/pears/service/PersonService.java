@@ -1,6 +1,6 @@
 package com.project.pears.service;
 
-import com.project.pears.dto.PersonDTO;
+import com.project.pears.dto.PersonDto;
 import com.project.pears.entity.Person;
 import com.project.pears.entity.Team;
 import com.project.pears.exception.PersonNotFoundException;
@@ -9,7 +9,6 @@ import com.project.pears.repository.PersonRepository;
 
 import com.project.pears.repository.TeamRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,22 +22,22 @@ public class PersonService {
     private final PersonFactory factory;
 
 
-    public PersonDTO getById(String id) {
+    public PersonDto getById(String id) {
         Person person =  personRepository.findById(Long.valueOf(id))
                 .orElseThrow( () -> new PersonNotFoundException("Person with cannot be found with ID: " + id));
         return factory.toDTO(person);
     }
 
     @Transactional
-    public PersonDTO create(@Valid PersonDTO personDTO) {
+    public PersonDto create(PersonDto personDTO) {
         Person entity = factory.toEntity(personDTO);
 
-        entity.setTeam(teamFinder());
+        entity.setTeam(getTempTeam());
         Person createdEntity = personRepository.save(entity);
         return factory.toDTO(createdEntity);
     }
 
-    public PersonDTO update(String id, @Valid PersonDTO personDTO) {
+    public PersonDto update(String id, PersonDto personDTO) {
         Person person =  personRepository.findById(Long.valueOf(id))
                 .orElseThrow( () -> new PersonNotFoundException("Person with cannot be found with ID: " + id));
 
@@ -55,7 +54,7 @@ public class PersonService {
     }
 
     // Temporary
-    private Team teamFinder() {
+    private Team getTempTeam() {
         Team tempTeam = teamRepository.findById(1L)
                 .orElseGet(() -> {
                     Team t = new Team();

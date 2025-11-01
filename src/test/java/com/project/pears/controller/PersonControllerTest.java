@@ -1,6 +1,6 @@
 package com.project.pears.controller;
 
-import com.project.pears.dto.PersonDTO;
+import com.project.pears.dto.PersonDto;
 import com.project.pears.service.PersonService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class PersonControllerTest {
 
     @Test
     void getById() {
-        PersonDTO personDTO = PersonDTO.builder()
+        PersonDto personDTO = PersonDto.builder()
                 .id(id)
                 .name(name)
                 .role(role)
@@ -44,7 +44,7 @@ class PersonControllerTest {
         // Arrange
         when(mockPersonService.getById(id)).thenReturn(personDTO);
         // Act
-        ResponseEntity<PersonDTO> response = subject.getById(id);
+        ResponseEntity<PersonDto> response = subject.getById(id);
 
         // Assert
         assertNotNull(response.getBody());
@@ -55,27 +55,27 @@ class PersonControllerTest {
 
     @Test
     void create() {
-        PersonDTO dto = PersonDTO.builder()
+        PersonDto dto = PersonDto.builder()
                 .name(name)
                 .role(role)
                 .build();
 
-        PersonDTO createdPerson = PersonDTO.builder()
+        PersonDto createdPerson = PersonDto.builder()
                 .id("2")
                 .name(name)
                 .role(role)
                 .build();
 
         // Arrange
-        when(mockPersonService.create(any(PersonDTO.class))).thenReturn(createdPerson);
+        when(mockPersonService.create(any(PersonDto.class))).thenReturn(createdPerson);
 
         // Act
-        ResponseEntity<PersonDTO> response = subject.create(dto);
+        ResponseEntity<PersonDto> response = subject.create(dto);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        PersonDTO actual = response.getBody();
+        PersonDto actual = response.getBody();
         assertNotNull(actual.getId());
         assertEquals(name, actual.getName());
         assertEquals(role, actual.getRole());
@@ -84,10 +84,10 @@ class PersonControllerTest {
     @Test
     void update() {
         String newRole = "QA";
-        PersonDTO updatedDto = PersonDTO.builder().name(name).role(newRole).build();
-        when(mockPersonService.update(anyString(), any(PersonDTO.class))).thenReturn(updatedDto);
+        PersonDto updatedDto = PersonDto.builder().name(name).role(newRole).build();
+        when(mockPersonService.update(anyString(), any(PersonDto.class))).thenReturn(updatedDto);
 
-        ResponseEntity<PersonDTO> response = subject.update(updatedDto, id);
+        ResponseEntity<PersonDto> response = subject.update(updatedDto, id);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
