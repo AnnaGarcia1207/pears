@@ -15,14 +15,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up JDK
+      # Step 2: Set up JDK with Maven cache enabled
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
           distribution: 'temurin'
-          cache: maven
+          java-version: '21'
+          cache: 'maven'  # Enables caching of ~/.m2/repository
 
       # Step 3: Build and run tests
       - name: Build and run tests
-        run: mvn clean verify --batch-mode
+        run: mvn --batch-mode clean verify
