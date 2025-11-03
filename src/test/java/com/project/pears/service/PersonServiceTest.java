@@ -101,9 +101,46 @@ class PersonServiceTest {
 
     @Test
     void update() {
+        Person person = new Person();
+        person.setId(Long.valueOf(id));
+        person.setName(name);
+        person.setRole(role);
+
+        String updatedName = "Neo Surname";
+        String updatedRole = "Data Scientists";
+
+        PersonDto expected = PersonDto.builder()
+                .id(id)
+                .name(updatedName)
+                .role(updatedRole)
+                .build();
+
+        when(mockPersonRepository.findById(any(Long.class))).thenReturn(Optional.of(person));
+        person.setName(updatedName);
+        person.setRole(updatedRole);
+        when(mockPersonRepository.save(any(Person.class))).thenReturn(person);
+        when(mockPersonFactory.toDTO(any(Person.class))).thenReturn(expected);
+
+        PersonDto actual = subject.update(id, expected);
+
+        assertNotNull(actual);
+        assertEquals(id, actual.getId());
+        assertEquals(updatedName, actual.getName());
+        assertEquals(updatedRole, actual.getRole());
+        verify(mockPersonRepository, times(1)).save(any(Person.class));
     }
 
     @Test
     void delete() {
+        Person person = new Person();
+        person.setId(Long.valueOf(id));
+        person.setName(name);
+        person.setRole(role);
+        when(mockPersonRepository.findById(any(Long.class))).thenReturn(Optional.of(person));
+        doNothing().when(mockPersonRepository).delete(person);
+        subject.delete(id);
+
+        verify(mockPersonRepository).delete(person);
+        verify(mockPersonRepository, times(1)).delete(any(Person.class));
     }
 }
