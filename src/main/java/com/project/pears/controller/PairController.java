@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/pairs")
 @RequiredArgsConstructor
@@ -21,23 +23,28 @@ public class PairController {
     }
 
     @GetMapping()
-    public PairDto getPairs() {
-        throw new UnsupportedOperationException("Not yet Implemented");
+    public ResponseEntity<List<PairDto>> getPairs() {
+        List<PairDto> dtos = pairService.getAllPairs();
+        return ResponseEntity.ok(dtos);
     }
 
     @PostMapping
-    public PairDto create(@RequestBody @Valid PairDto pairDto) {
-        throw new UnsupportedOperationException("Not yet Implemented");
+    public ResponseEntity<PairDto> create(@RequestBody @Valid PairDto pairDto) {
+        PairDto created = pairService.create(pairDto);
+        return ResponseEntity.ok(created);
     }
 
-    @PutMapping
-    public PairDto update(@RequestBody @Valid PairDto pairDto) {
-        throw new UnsupportedOperationException("Not yet Implemented");
+    @PutMapping("/{id}")
+    public ResponseEntity<PairDto> update(@RequestBody @Valid PairDto pairDto,
+                          @PathVariable String id) {
+        PairDto updated = pairService.update(id, pairDto);
+        return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping
-    public void delete(@PathVariable String id) {
-        throw new UnsupportedOperationException("Not yet Implemented");
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        pairService.delete(id);
+        return ResponseEntity.noContent().build();
     }
 
 
