@@ -29,11 +29,6 @@ class PersonControllerTest {
     private final String name = "John Doe";
     private final String role = "Developer";
 
-    @BeforeEach
-    void setUp() {
-
-    }
-
     @Test
     void getById() {
         PersonDto personDTO = PersonDto.builder()
