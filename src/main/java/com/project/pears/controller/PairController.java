@@ -16,7 +16,7 @@ public class PairController {
 
     private final PairService pairService;
 
-    @GetMapping()
+    @GetMapping(params = "id")
     public ResponseEntity<PairDto> getById(@RequestParam String id) {
         PairDto dto = pairService.getById(id);
         return ResponseEntity.ok(dto);
