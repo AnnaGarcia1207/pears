@@ -49,7 +49,7 @@ class PersonServiceTest {
                 .build();
 
         when(mockPersonRepository.findById(any(Long.class))).thenReturn(Optional.of(person));
-        when(mockPersonFactory.toDTO(any(Person.class))).thenReturn(expected);
+        when(mockPersonFactory.toDto(any(Person.class))).thenReturn(expected);
 
         PersonDto actual = subject.getById(id);
 
@@ -89,7 +89,7 @@ class PersonServiceTest {
 
 
 
-        when(mockPersonFactory.toDTO(any(Person.class))).thenReturn(expectedDto);
+        when(mockPersonFactory.toDto(any(Person.class))).thenReturn(expectedDto);
 
         PersonDto actual = subject.create(input);
 
@@ -119,7 +119,7 @@ class PersonServiceTest {
         person.setName(updatedName);
         person.setRole(updatedRole);
         when(mockPersonRepository.save(any(Person.class))).thenReturn(person);
-        when(mockPersonFactory.toDTO(any(Person.class))).thenReturn(expected);
+        when(mockPersonFactory.toDto(any(Person.class))).thenReturn(expected);
 
         PersonDto actual = subject.update(id, expected);
 

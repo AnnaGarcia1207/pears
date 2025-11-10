@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PersonFactory {
 
-    public PersonDto toDTO(Person person) {
+    public PersonDto toDto(Person person) {
         return PersonDto.builder()
                 .name(person.getName())
                 .role(person.getRole())

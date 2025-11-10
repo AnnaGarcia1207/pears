@@ -25,7 +25,7 @@ public class PersonService {
     public PersonDto getById(String id) {
         Person person =  personRepository.findById(Long.valueOf(id))
                 .orElseThrow( () -> new PersonNotFoundException("Person with cannot be found with ID: " + id));
-        return factory.toDTO(person);
+        return factory.toDto(person);
     }
 
     @Transactional
@@ -34,7 +34,7 @@ public class PersonService {
 
         entity.setTeam(getTempTeam());
         Person createdEntity = personRepository.save(entity);
-        return factory.toDTO(createdEntity);
+        return factory.toDto(createdEntity);
     }
 
     public PersonDto update(String id, PersonDto personDTO) {
@@ -44,7 +44,7 @@ public class PersonService {
         person.setName(personDTO.getName());
         person.setRole(personDTO.getRole());
         Person updatedPerson = personRepository.save(person);
-        return factory.toDTO(updatedPerson);
+        return factory.toDto(updatedPerson);
     }
 
     public void delete(String id) {
