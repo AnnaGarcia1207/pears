@@ -5,6 +5,7 @@ import com.project.pears.entity.Pair;
 import com.project.pears.exception.PairNotFoundException;
 import com.project.pears.factory.PairFactory;
 import com.project.pears.repository.PairRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,11 +26,15 @@ public class PairService {
     }
 
     public List<PairDto> getAllPairs() {
-        throw new UnsupportedOperationException("Not yet Implemented");
+        return pairRepository.findAll().stream().map(factory::toDto).toList();
     }
 
+    @Transactional
     public PairDto create(PairDto dto) {
-        throw new UnsupportedOperationException("Not yet Implemented");
+        Pair entity = factory.toEntity(dto);
+
+        Pair createdEntity = pairRepository.save(entity);
+        return factory.toDto(createdEntity);
     }
 
     public PairDto update(String id, PairDto dto) {

@@ -10,4 +10,8 @@ public class PairFactory {
     public PairDto toDto(Pair pair) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    public Pair toEntity(PairDto dto) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
