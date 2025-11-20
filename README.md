@@ -16,7 +16,8 @@ Users can create custom pairings or generate random pairs to streamline teamwork
     ```bash
    git clone git@github.com:AnnaGarcia1207/pears.git
    ```
-3. Start the program locally:
+3. `chmod +x mvnw` then `./mvnw clean install`
+4. Start the program locally:
     ```bash
    ./mvnw spring-boot:run
     ```
